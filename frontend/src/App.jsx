@@ -372,8 +372,8 @@ function optionLabel(language, value) {
 
 function PlantIllustration() {
   return (
-    <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center opacity-90">
-      <svg viewBox="0 0 320 140" className="h-28 w-full max-w-md text-emerald-200/80">
+    <div className="pointer-events-none absolute inset-x-0 top-0 z-0 hidden justify-center opacity-90 sm:flex">
+      <svg viewBox="0 0 320 140" className="h-24 w-full max-w-sm text-emerald-200/80 lg:h-28 lg:max-w-md">
         <path d="M160 130 C150 110 145 88 146 65" stroke="currentColor" strokeWidth="4" fill="none" strokeLinecap="round" />
         <path d="M146 78 C115 74 99 52 102 27 C127 33 145 49 146 78Z" fill="currentColor" />
         <path d="M148 60 C180 56 205 34 211 10 C183 11 155 28 148 60Z" fill="currentColor" opacity="0.8" />
@@ -393,8 +393,8 @@ function Message({ message }) {
       <div
         className={
           isBot
-            ? "max-w-[85%] rounded-[20px] rounded-bl-md border border-emerald-100 bg-white/90 px-4 py-3 text-sm text-slate-700 shadow-sm"
-            : "max-w-[85%] rounded-[20px] rounded-br-md bg-gradient-to-r from-emerald-500 to-violet-500 px-4 py-3 text-sm text-white shadow-lg shadow-emerald-500/20"
+            ? "max-w-[96%] sm:max-w-[85%] rounded-[20px] rounded-bl-md border border-emerald-100 bg-white/90 px-3.5 py-3 text-sm leading-6 text-slate-700 shadow-sm sm:px-4"
+            : "max-w-[96%] sm:max-w-[85%] rounded-[20px] rounded-br-md bg-gradient-to-r from-emerald-500 to-violet-500 px-3.5 py-3 text-sm leading-6 text-white shadow-lg shadow-emerald-500/20 sm:px-4"
         }
       >
         {message.text}
@@ -405,14 +405,14 @@ function Message({ message }) {
 
 function Options({ options, onSelect, disabled }) {
   return (
-    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
       {options.map((option) => (
         <button
           key={option.value}
           type="button"
           disabled={disabled}
           onClick={() => onSelect(option)}
-          className="rounded-full border border-emerald-100 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50 disabled:opacity-50"
+          className="min-h-12 rounded-2xl border border-emerald-100 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50 disabled:opacity-50 sm:rounded-full"
         >
           {option.label}
         </button>
@@ -444,7 +444,7 @@ function MultiSelect({ options, onSubmit, disabled, buttonLabel }) {
               type="button"
               disabled={disabled}
               onClick={() => toggleOption(option)}
-              className={`flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm transition ${
+              className={`flex min-h-14 w-full items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm leading-5 transition ${
                 active
                   ? "border-emerald-300 bg-emerald-50 text-emerald-800"
                   : "border-slate-200 bg-white text-slate-700 hover:border-violet-200"
@@ -465,7 +465,7 @@ function MultiSelect({ options, onSubmit, disabled, buttonLabel }) {
         type="button"
         disabled={disabled || selected.length === 0}
         onClick={() => onSubmit(selected)}
-        className="w-full rounded-2xl bg-gradient-to-r from-emerald-500 to-violet-500 px-4 py-3 text-sm font-semibold text-white shadow-lg disabled:opacity-50"
+        className="w-full rounded-2xl bg-gradient-to-r from-emerald-500 to-violet-500 px-4 py-3.5 text-sm font-semibold text-white shadow-lg disabled:opacity-50"
       >
         {buttonLabel}
       </button>
@@ -552,7 +552,7 @@ export default function App() {
         <button
           type="button"
           onClick={restartChat}
-          className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-violet-500 px-4 py-3 text-sm font-semibold text-white shadow-lg"
+          className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-violet-500 px-4 py-3.5 text-sm font-semibold text-white shadow-lg"
         >
           <RotateCcw className="h-4 w-4" />
           {t(language, "restart")}
@@ -592,20 +592,20 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.14),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(139,92,246,0.12),_transparent_28%),linear-gradient(180deg,_#f5fff8,_#f8fafc)] px-4 py-6">
-      <div className="mx-auto flex min-h-[calc(100vh-3rem)] max-w-4xl items-center justify-center">
-        <div className="relative flex h-[88vh] w-full max-w-2xl flex-col overflow-hidden rounded-[30px] border border-white/80 bg-white/85 shadow-2xl shadow-emerald-950/10 backdrop-blur">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.14),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(139,92,246,0.12),_transparent_28%),linear-gradient(180deg,_#f5fff8,_#f8fafc)] px-0 py-0 sm:px-4 sm:py-6">
+      <div className="mx-auto flex min-h-[100svh] max-w-5xl items-stretch justify-center sm:min-h-[calc(100vh-3rem)] sm:items-center">
+        <div className="relative flex min-h-[100svh] w-full max-w-3xl flex-col overflow-hidden rounded-none border-0 bg-white/90 shadow-none backdrop-blur sm:min-h-[720px] sm:rounded-[30px] sm:border sm:border-white/80 sm:shadow-2xl sm:shadow-emerald-950/10 lg:min-h-[82vh]">
           <PlantIllustration />
 
-          <div className="relative overflow-hidden bg-gradient-to-r from-emerald-600 via-emerald-500 to-violet-500 px-5 py-5 text-white">
+          <div className="relative z-10 overflow-hidden bg-gradient-to-r from-emerald-600 via-emerald-500 to-violet-500 px-3 pb-4 pt-[max(0.75rem,env(safe-area-inset-top))] text-white sm:px-5 sm:py-5">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.18),_transparent_42%)]" />
-            <div className="relative flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15 shadow-lg backdrop-blur">
-                  <Bot className="h-5 w-5" />
+            <div className="relative flex items-start justify-between gap-3 sm:items-center">
+              <div className="flex min-w-0 items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white/15 shadow-lg backdrop-blur sm:h-11 sm:w-11">
+                  <Bot className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
                 </div>
-                <div>
-                  <h1 className="text-lg font-semibold">{t(language, "title")}</h1>
+                <div className="min-w-0">
+                  <h1 className="text-sm font-semibold leading-tight sm:text-lg">{t(language, "title")}</h1>
                   <div className="mt-1 flex items-center gap-2 text-xs text-white/90">
                     <span className="h-2 w-2 rounded-full bg-emerald-200" />
                     {t(language, "online")}
@@ -619,7 +619,7 @@ export default function App() {
             </div>
           </div>
 
-          <div ref={scrollRef} className="custom-scroll relative flex-1 space-y-4 overflow-y-auto bg-[linear-gradient(180deg,_rgba(236,253,245,0.55),_rgba(255,255,255,0.9))] px-4 py-5">
+          <div ref={scrollRef} className="custom-scroll relative z-10 flex-1 space-y-3 overflow-y-auto bg-[linear-gradient(180deg,_rgba(236,253,245,0.55),_rgba(255,255,255,0.9))] px-3 py-3 sm:space-y-4 sm:px-4 sm:pt-16 sm:pb-5">
             <div className="absolute left-3 top-6 hidden rounded-full bg-emerald-100/70 p-2 text-emerald-600 sm:block">
               <Leaf className="h-4 w-4" />
             </div>
@@ -637,7 +637,7 @@ export default function App() {
             )}
           </div>
 
-          <div className="border-t border-emerald-100 bg-white/95 px-4 py-4 backdrop-blur">
+          <div className="relative z-10 border-t border-emerald-100 bg-white/95 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur sm:px-4 sm:py-4">
             {renderInput()}
           </div>
         </div>
